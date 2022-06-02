@@ -17,9 +17,14 @@ class Dashboard(APIView):
 
 
 class UserProfile(APIView):
-    def get(self, request):
+    def get(self, request, number=None):
+        context = {}
 
-        return render(request, "content/user.html")     # user 화면
+        if number:
+            recipient = Recipient.objects.filter(user_id=number).first
+            context = {'recipient': recipient}
+
+        return render(request, "content/user.html", context)     # user 화면
 
 
 class Table(APIView):

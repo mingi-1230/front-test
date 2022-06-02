@@ -1,30 +1,121 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base.html' %}
+{% load static %}
+<!-- 사이드바 들어갈곳 -->
+{% block sidebar %}
+    <div class="sidebar" data-color="purple" data-image="{% static "img/sidebar-5.jpg" %}">
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/content/dashboard" class="simple-text">
+                    <img src="{% static 'img/emotion.png' %}" style="width: 60px; height:60px;"/>
+                    <i>WITH</i>
+                </a>
+            </div>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <!-- 구글 폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <!-- jquery-->
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-
-    <title>회원가입</title>
-</head>
-
-
-<body style="font-family: 'Noto Sans KR', sans-serif; background-color: #FAFAFA">
-<!-- 네비게이션 바-->
-<!-- 회원가입 -->
-<div style="display: flex; flex-direction: column; align-items: center; width: 100%">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/content/dashboard">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/content/user">
+                        <i class="pe-7s-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/content/table">
+                        <i class="pe-7s-note2"></i>
+                        <p>Table List</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/content/notifications">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+<!-- 위쪽 네비바 들어갈곳 -->
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#pablo"> 회원가입 </a>
+            <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar burger-lines"></span>
+                <span class="navbar-toggler-bar burger-lines"></span>
+                <span class="navbar-toggler-bar burger-lines"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-toggle="dropdown">
+                            <i class="nc-icon nc-palette"></i>
+                            <span class="d-lg-none">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="nc-icon nc-planet"></i>
+                            <span class="notification">5</span>
+                            <span class="d-lg-none">Notification</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Notification 1</a>
+                            <a class="dropdown-item" href="#">Notification 2</a>
+                            <a class="dropdown-item" href="#">Notification 3</a>
+                            <a class="dropdown-item" href="#">Notification 4</a>
+                            <a class="dropdown-item" href="#">Another notification</a>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nc-icon nc-zoom-split"></i>
+                            <span class="d-lg-block">&nbsp;Search</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/login">
+                            <span class="no-icon">Account</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="no-icon">Dropdown</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pablo">
+                            <span class="no-icon">Log out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+<!-- 컨텐츠 들어갈곳 -->
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div style="display: flex; flex-direction: column; align-items: center; width: 100%">
     <div style="padding: 20px; text-align: center; border: solid 1px rgba(219, 219, 219, 1); width: 300px; margin-top: 30px; background-color: white">
         <div>
             <div style="margin-bottom: 15px">
@@ -105,8 +196,13 @@
         <div> 계정이 있으신가요? <a href="/account/login">로그인</a></div>
     </div>
 </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 
+{% block script %}
 <script>
     function checks() {
         var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
@@ -254,17 +350,4 @@
         }
     });
 </script>
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
-</body>
-</html>
+{% endblock %}
