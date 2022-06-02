@@ -1,10 +1,11 @@
+from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render
 from rest_framework.views import APIView
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 # Create your views here.
-from account.models import AuthUser
+from account.models import User
 from datetime import datetime
 
 
@@ -19,23 +20,22 @@ class Join(APIView):
         relationship = request.data.get('relationship')
         name = request.data.get('name')
         password = request.data.get('password')
-        #birth = request.data.get('birth')
-        #phonenumber = request.data.get('phonenumber')
-        #gender = request.data.get('gender')
+        crypted_password = make_password(password)
+        phonenumber = request.data.get('phonenumber')
+        gender = request.data.get('gender')
         member_type = request.data.get('member_type')   # 1관리자 2보호자
+        recipient_id = request.data.get('recipient_id')
 
-        user_id = request.data.get('user_id')
-
-        AuthUser.objects.create(id=id,
-                                password=password,
-                                relationship=relationship,
-                                is_superuser=0,
-                                recipient_id=user_id,
-                                email=email,
-                                username=name,
-                                is_staff=member_type,
-                                is_active=member_type,
-                                date_joined=datetime.now())
+        User.objects.create(id=id,
+                            password=crypted_password,
+                            relationship=relationship,
+                            recipient_id=recipient_id,
+                            gender=gender,
+                            email=email,
+                            username=name,
+                            phonenumber=phonenumber,
+                            membertype=member_type,
+                            date_joined=datetime.now())
 
         return Response(status=200)
 
@@ -49,12 +49,12 @@ class Login(APIView):
         id = request.data.get('id', None)
         password = request.data.get('password', None)
 
-        user = AuthUser.objects.filter(id=id).first()
+        user = User.objects.filter(id=id).first()
 
         if user is None:
             return Response(status=404, data=dict(message="회원정보가 잘못되었습니다."))
 
-        if user.password == password:
+        if check_password(password, user.password):
             # TODO 로그인을 했다. 세션 or 쿠키
             request.session['id'] = id
             return Response(status=200)

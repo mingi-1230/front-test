@@ -3,23 +3,21 @@ from django.db import models
 # Create your models here.
 
 
-class AuthUser(models.Model):
-    id = models.CharField(primary_key=True, max_length=12)
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(max_length=150)
+class User(models.Model):
+    id = models.CharField(primary_key=True, max_length=16, unique=True)
+    password = models.CharField(max_length=255)
+    username = models.CharField(max_length=20)
+    gender = models.CharField(max_length=8, default='')
+    phonenumber = models.CharField(max_length=11)
     relationship = models.CharField(max_length=8)
-    last_name = models.CharField(max_length=150)
     email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
+    membertype = models.IntegerField()
+    recipient_id = models.IntegerField()
     date_joined = models.DateTimeField()
-    recipient_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
-        db_table = 'auth_user'
+        managed = True
+        db_table = 'user'
 
 
 
